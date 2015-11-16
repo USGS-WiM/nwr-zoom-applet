@@ -34,14 +34,16 @@ require([
         sliderStyle: "small",
         logo: false
     });
+
+    nwrLayer = new FeatureLayer("https://gis.fws.gov/arcgis/rest/services/FWSCadastral_Simplified/FeatureServer/0", {id: "nwr", visible:true, opacity: 0.65, mode: FeatureLayer.MODE_ONDEMAND, outFields: ["*"]});
+    map.addLayer(nwrLayer);
+
     //visitor service layer as feature layer
     visitorServiceLayer = new FeatureLayer("http://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/FWSVisitorServices/FeatureServer/0", {id: "visitorService", visible:true, mode: FeatureLayer.MODE_ONDEMAND, outFields: ["*"]});
     map.addLayer(visitorServiceLayer);
-    //nwrLayer = new FeatureLayer("https://gis.fws.gov/arcgis/rest/services/FWSCadastral_Simplified/FeatureServer/0", {id: "nwr", visible:true, mode: FeatureLayer.MODE_ONDEMAND, outFields: ["*"]});
-    //map.addLayer(nwrLayer);
 
-    nwrDynamicLayer = new ArcGISDynamicMapServiceLayer("http://gis.fws.gov/arcgis/rest/services/FWSCadastral_Internet/MapServer", {id: "nwrDynamic"});
-    map.addLayer(nwrDynamicLayer);
+    //nwrDynamicLayer = new ArcGISDynamicMapServiceLayer("http://gis.fws.gov/arcgis/rest/services/FWSCadastral_Internet/MapServer", {id: "nwrDynamic"});
+    //map.addLayer(nwrDynamicLayer);
     //disable client caching to allow refreshing of layer definition
     //nwrDynamicLayer.setDisableClientCaching(true);
 
@@ -56,10 +58,8 @@ require([
             //layerDefinitions[0] = "LIT = " + lit;
             //nwrDynamicLayer.setLayerDefinitions(layerDefinitions[0]);
             //nwrDynamicLayer.refresh();
-
             //definition expression for feature layer
             //nwrLayer.setDefinitionExpression("LIT = '" + lit + "'");
-
             var refugePolysExtent = graphicsUtils.graphicsExtent(featureSet.features);
             map.setExtent(refugePolysExtent, true);
             //window.history.pushState(null,null,"?lit=" + featureSet.features[0].attributes.LIT);
