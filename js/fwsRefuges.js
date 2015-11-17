@@ -52,7 +52,6 @@ require([
     dijitPopup,
     urlUtils
 ) {
-
     //map = new Map("map", {
     //    basemap: "topo",
     //    wrapAround180: true,
@@ -61,17 +60,13 @@ require([
     //    sliderStyle: "small",
     //    logo: false
     //});
-
     map = BootstrapMap.create("mapDiv",{
         basemap:"topo",
         center:[-98.5795,39.8282],
-        zoom:5
+        zoom:5,
+        logo: false
     });
-
-    var scalebar = new Scalebar({
-        map: map,
-        scalebarUnit: "dual"
-    });
+    var scalebar = new Scalebar({map: map, scalebarUnit: "dual"});
 
     $(document).ready(function() {
         $("#basemapsDropdown li").click(function (e) {
@@ -88,7 +83,6 @@ require([
             }
         });
     });
-
     //national wildlife refuges as feature layer
     nwrLayer = new FeatureLayer("https://gis.fws.gov/arcgis/rest/services/FWSCadastral_Simplified/FeatureServer/0", {id: "nwr", visible:true, opacity: 0.65, mode: FeatureLayer.MODE_ONDEMAND, outFields: ["*"]});
     map.addLayer(nwrLayer);
@@ -102,7 +96,6 @@ require([
     //map.addLayer(nwrDynamicLayer);
     //disable client caching to allow refreshing of layer definition
     //nwrDynamicLayer.setDisableClientCaching(true);
-
     dialog = new TooltipDialog({
         id: "tooltipDialog",
         style: "position: absolute; width: 250px; height:100%; font: normal normal normal 10pt Helvetica;z-index:100"
@@ -117,12 +110,10 @@ require([
         ),
         new Color([125,125,125,0.35])
     );
-    //
-    //close the dialog when the mouse leaves the highlight graphic
+    //close the dialog when the mouse leaves the nwr highlight graphic or close button clicked
     map.on("load", function(){
         map.graphics.enableMouseEvents();
         map.graphics.on("mouse-out", closeDialog);
-
     });
 
     nwrLayer.on("click", function(evt){
@@ -132,7 +123,6 @@ require([
         map.graphics.add(highlightGraphic);
 
         dialog.setContent(content);
-
         domStyle.set(dialog.domNode, "opacity", 0.85);
         dijitPopup.open({
             popup: dialog,
@@ -185,25 +175,33 @@ require([
 
   function mapReady(){
     //build query task
-    queryTask = new QueryTask("https://gis.fws.gov/arcgis/rest/services/FWSCadastral_Simplified/FeatureServer/0");
+    var queryTask = new QueryTask("https://gis.fws.gov/arcgis/rest/services/FWSCadastral_Simplified/FeatureServer/0");
     //build query filter
-    refugeQuery = new Query();
+    var refugeQuery = new Query();
     refugeQuery.returnGeometry = true;
-    refugeQuery.outFields = ["LIT"];
+    refugeQuery.outFields = ["LIT", "ORGCODE"];
      //pass the url parameters into a javascript object using esri's urlToObject class
     var urlSiteObject = esri.urlToObject(document.location.href);
 
     if (urlSiteObject.query){
-
+      //check for LIT
       if (urlSiteObject.query.lit){
-        var id = urlSiteObject.query.lit;
+        var lit = urlSiteObject.query.lit;
         //set query based on the parameter(s) from the URL
-        var idParam = "LIT = '" + id + "'";
-        refugeQuery.where = idParam;
+        var litParam = "LIT = '" + lit + "'";
+        refugeQuery.where = litParam;
+        //execute query and call zoomToRefuge on completion
+        queryTask.execute(refugeQuery,zoomToRefuge);
+      }
+      //check for ORGCODE
+      if (urlSiteObject.query.orgcode){
+        var orgcode = urlSiteObject.query.orgcode;
+        //set query based on the parameter(s) from the URL
+        var orgCodeParam = "ORGCODE = '" + orgcode + "'";
+        refugeQuery.where = orgCodeParam;
         //execute query and call zoomToRefuge on completion
         queryTask.execute(refugeQuery,zoomToRefuge);
       }
     }
   }
-
 });
