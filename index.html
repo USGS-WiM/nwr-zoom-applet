@@ -4,15 +4,81 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <title></title>
-    <style>
-      html, body {height: 100%; width: 100%; margin: 0; padding: 0; background-color: #7E7E84;}
-      #map{border-width:1px; border-style: solid ;border-color: #000; padding:0; z-index:0; height:100%; width:100%;}
-    </style>
-    <link rel="stylesheet" href="https://js.arcgis.com/3.10/js/esri/css/esri.css">
-    <script src="https://js.arcgis.com/3.10/"></script>
-    <script src="js/fwsRefuges.js" type="text/javascript"></script>
+
+      <!-- Bootstrap -->
+      <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
+      <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.13/esri/css/esri.css">
+      <link rel="stylesheet" type="text/css" href="http://esri.github.io/bootstrap-map-js/src/css/bootstrapmap.css">
+      <link rel="stylesheet" href="http://js.arcgis.com/3.14/dijit/themes/tundra/tundra.css">
+      <style type="text/css">
+          #mapDiv {
+              height: 100%;
+              width:100%;
+          }
+          .container {width:100%}
+
+          .basemaps {
+              position:absolute;
+              top:5px;
+              left:60px;
+              z-index:3;
+              color: black;
+              background-color: rgb(255,255,255);
+              background-color: rgba(255,255,255,0.8);
+          }
+
+          .esriSimpleSliderTL {
+              bottom: auto;
+              right: auto;
+              top: 5px;
+              left: 5px;}
+
+      </style>
+
+    <!--<style>-->
+      <!--html, body {height: 100%; width: 100%; margin: 0; padding: 0; background-color: #7E7E84;}-->
+      <!--#map{border-width:1px; border-style: solid ;border-color: #000; padding:0; z-index:0; height:100%; width:100%;}-->
+    <!--</style>-->
+
+      <script type="text/javascript">
+          var package_path = "//esri.github.com/bootstrap-map-js/src/js";
+          var dojoConfig = {
+              packages: [{
+                  name: "application",
+                  location: package_path
+              }]
+          };
+      </script>
+      <script src="//js.arcgis.com/3.13compact"></script>
+
+
+
+
+      <!--<link rel="stylesheet" href="http://js.arcgis.com/3.14/dijit/themes/claro/claro.css">-->
+      <!--<link rel="stylesheet" href="https://js.arcgis.com/3.10/js/esri/css/esri.css">-->
+        <!--<script src="https://js.arcgis.com/3.10/"></script>-->
+
+      <!-- jQuery (for Bootstrap's JavaScript plugins) -->
+      <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+      <!-- Include all  plugins or individual files as needed -->
+      <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+      <script src="js/fwsRefuges.js" type="text/javascript"></script>
+
   </head>
-  <body>
-    <div id="map"></div>
+  <body class="container tundra">
+  <div id="mapDiv">
+      <!-- Single button -->
+      <div class="btn-group basemaps">
+          <button id="basemapsButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Basemap <span class="caret"></span>
+          </button>
+          <ul id="basemapsDropdown" class="dropdown-menu" >
+              <li><a href="#">Streets</a></li>
+              <li><a href="#">Imagery</a></li>
+              <li><a href="#">Topographic</a></li>
+          </ul>
+      </div>
+  </div>
   </body>
 </html>
