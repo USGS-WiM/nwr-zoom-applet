@@ -84,7 +84,11 @@ require([
         });
     });
     //national wildlife refuges as feature layer
-    nwrLayer = new FeatureLayer("https://gis.fws.gov/arcgis/rest/services/FWSCadastral_Simplified/FeatureServer/0", {id: "nwr", visible:true, opacity: 0.65, mode: FeatureLayer.MODE_ONDEMAND, outFields: ["*"]});
+
+    nwrOutlineLayer = new FeatureLayer("https://gis.fws.gov/arcgis/rest/services/FWSCadastral_Internet/MapServer/0", {id: "nwr2", visible:true, mode: FeatureLayer.MODE_ONDEMAND, outFields: ["*"]});
+    map.addLayer(nwrOutlineLayer);
+
+    nwrLayer = new FeatureLayer("https://gis.fws.gov/arcgis/rest/services/FWSCadastral_Internet/MapServer/2", {id: "nwr", visible:true, mode: FeatureLayer.MODE_ONDEMAND, outFields: ["*"]});
     map.addLayer(nwrLayer);
 
     //visitor service layer as feature layer
@@ -111,11 +115,10 @@ require([
         new Color([125,125,125,0.35])
     );
     //close the dialog when the mouse leaves the nwr highlight graphic or close button clicked
-    map.on("load", function(){
-        map.graphics.enableMouseEvents();
-        map.graphics.on("mouse-out", closeDialog);
-    });
-
+    //map.on("load", function(){
+    //    map.graphics.enableMouseEvents();
+    //    map.graphics.on("mouse-out", closeDialog);
+    //});
     nwrLayer.on("click", function(evt){
         var t = "<b><button id='closeDialog' style='color:gray; float:right;'>&times;</button>${CMPXNAME}</b><hr>${ORGNAME}";
         var content = esriLang.substitute(evt.graphic.attributes,t);
@@ -137,8 +140,10 @@ require([
             "${BldgType}<br>" +
             "<b>Phone</b>: ${PHONE}<br>" +
             "${ADDRESS}<br>" +
-            "${CITY}, ${STATE}<br>" +
-            "${ZIPCODE}";
+            "${CITY}, ${STATE} ${ZIPCODE}<br>" +
+            "<b>Latitude:</b>${LAT}<br>" +
+            "<b>Longitude:</b>${LONG}<br>" +
+            "<a href='${URL}'>Refuge Page Link</a>";
         var content = esriLang.substitute(evt.graphic.attributes,t);
 
         dialog.setContent(content);
@@ -175,7 +180,7 @@ require([
 
   function mapReady(){
     //build query task
-    var queryTask = new QueryTask("https://gis.fws.gov/arcgis/rest/services/FWSCadastral_Simplified/FeatureServer/0");
+    var queryTask = new QueryTask("https://gis.fws.gov/arcgis/rest/services/FWSCadastral_Internet/MapServer/2");
     //build query filter
     var refugeQuery = new Query();
     refugeQuery.returnGeometry = true;
