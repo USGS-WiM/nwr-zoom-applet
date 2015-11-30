@@ -10,5 +10,23 @@ The purpose of this applet is to provide a static URL to zoom to a specified NWR
 Full example: `http://{domain}/nwr-zoom-applet?lit=KLP`
 
 
+#### Dependencies
+App is built with the ArcGIS API for JavaScript, version 3.13.
+Bootstrap v3.3.2
+Esri [bootstrap map](https://github.com/Esri/bootstrap-map-js)
+Dojo Tundra theme for ArcGIS JS API
+jQuery v1.11.1
+
+
+#### Map Services
+This application depends on 3 layers sourced from 2 map services hosted by FWS and ArcGIS Online:
+
+https://gis.fws.gov/arcgis/rest/services/FWSCadastral_Internet/MapServer
+Layers used: National Wildlife Refuges (>3M) (ID: 0) and National Wildlife Refuges (<3M) (ID: 2)
+
+
+http://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/FWSVisitorServices/FeatureServer
+Layer used: FWS Visitor Services (ID:0)
+
 ----------
 Powered by [WiM](wim.usgs.gov)
