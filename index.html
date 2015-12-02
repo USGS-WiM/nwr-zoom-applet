@@ -15,7 +15,7 @@
           .basemaps{
               position:absolute;
               top:5px;
-              left:60px;
+              left:45px;
               z-index:3;
               color: black;
               background-color: rgb(255,255,255);
@@ -39,6 +39,12 @@
               text-align: center;
               color: #6E7490;
           }
+          #HomeButton {
+              position: absolute;
+              top: 5px;
+              left: 150px;
+              z-index: 50;
+          }
           .esriSimpleSliderTL {bottom: auto;right:auto;top: 5px;left: 5px;opacity:0.8;}
       </style>
       <script type="text/javascript">
@@ -59,6 +65,7 @@
   </head>
   <body class="container tundra">
   <div id="mapDiv">
+      <div id="HomeButton"></div>
       <div class="btn-group basemaps">
           <button id="basemapsButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Basemap <span class="caret"></span>

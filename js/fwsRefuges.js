@@ -4,6 +4,7 @@ require([
     "esri/map",
     "application/bootstrapmap",
     "esri/dijit/BasemapGallery",
+    "esri/dijit/HomeButton",
     "esri/dijit/Scalebar",
     "esri/config",
     "dojo/on",
@@ -30,6 +31,7 @@ require([
     Map,
     BootstrapMap,
     BasemapGallery,
+    HomeButton,
     Scalebar,
     esriConfig,
     on,
@@ -68,6 +70,11 @@ require([
     });
     var scalebar = new Scalebar({map: map, scalebarUnit: "dual"});
 
+    var home = new HomeButton({
+        map: map
+    }, "HomeButton");
+    home.startup();
+
     $(document).ready(function() {
         $("#basemapsDropdown li").click(function (e) {
             switch (e.target.text) {
@@ -83,11 +90,10 @@ require([
             }
         });
     });
-    //national wildlife refuges as feature layer
-
-    nwrOutlineLayer = new FeatureLayer("https://gis.fws.gov/arcgis/rest/services/FWSCadastral_Internet/MapServer/0", {id: "nwr2", visible:true, mode: FeatureLayer.MODE_ONDEMAND, outFields: ["*"]});
+    //national wildlife refuges outline as feature layer(>3M)
+    nwrOutlineLayer = new FeatureLayer("https://gis.fws.gov/arcgis/rest/services/FWSCadastral_Internet/MapServer/0", {id: "nwrOutline", visible:true, mode: FeatureLayer.MODE_ONDEMAND, outFields: ["*"]});
     map.addLayer(nwrOutlineLayer);
-
+    //national wildlife refuges as feature layer (<3M)
     nwrLayer = new FeatureLayer("https://gis.fws.gov/arcgis/rest/services/FWSCadastral_Internet/MapServer/2", {id: "nwr", visible:true, mode: FeatureLayer.MODE_ONDEMAND, outFields: ["*"]});
     map.addLayer(nwrLayer);
 
