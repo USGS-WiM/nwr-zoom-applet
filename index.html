@@ -39,7 +39,7 @@
               text-align: center;
               color: #6E7490;
           }
-          #HomeButton {
+          #fullExtentButton {
               position: absolute;
               top: 5px;
               left: 150px;
@@ -65,9 +65,10 @@
   </head>
   <body class="container tundra">
   <div id="mapDiv">
-      <div id="HomeButton"></div>
+      <!--<div id="HomeButton"></div>-->
+      <button id="fullExtentButton" title="Go to full extent" type="button" class="btn btn-default"><span class="glyphicon glyphicon-globe"></span></button>
       <div class="btn-group basemaps">
-          <button id="basemapsButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button id="basemapsButton" type="button" title="Change basemap" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Basemap <span class="caret"></span>
           </button>
           <ul id="basemapsDropdown" class="dropdown-menu" >
