@@ -1,10 +1,9 @@
 //global variables
-var map, nwrLayer, nwrDynamicLayer, visitorServiceLayer, dialog;
+var map, nwrLayer, nwrOutlineLayer, visitorServiceLayer, dialog, initCenter = [-98.5795,39.8282];
 require([
     "esri/map",
     "application/bootstrapmap",
     "esri/dijit/BasemapGallery",
-    "esri/dijit/HomeButton",
     "esri/dijit/Scalebar",
     "esri/config",
     "dojo/on",
@@ -31,7 +30,6 @@ require([
     Map,
     BootstrapMap,
     BasemapGallery,
-    HomeButton,
     Scalebar,
     esriConfig,
     on,
@@ -64,17 +62,15 @@ require([
     //});
     map = BootstrapMap.create("mapDiv",{
         basemap:"topo",
-        center:[-98.5795,39.8282],
+        center: initCenter,
         zoom:5,
         logo: false
     });
     var scalebar = new Scalebar({map: map, scalebarUnit: "dual"});
-
-    var home = new HomeButton({
-        map: map
-    }, "HomeButton");
-    home.startup();
-
+    $("#fullExtentButton").click(function () {
+        map.setZoom(5);
+        map.centerAt(initCenter);
+    });
     $(document).ready(function() {
         $("#basemapsDropdown li").click(function (e) {
             switch (e.target.text) {
