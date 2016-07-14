@@ -94,7 +94,7 @@ require([
     map.addLayer(nwrLayer);
 
     //visitor service layer as feature layer
-    visitorServiceLayer = new FeatureLayer("http://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/FWSVisitorServices/FeatureServer/0", {id: "visitorService", visible:true, mode: FeatureLayer.MODE_ONDEMAND, outFields: ["*"]});
+    visitorServiceLayer = new FeatureLayer("https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/FWSVisitorServices/FeatureServer/0", {id: "visitorService", visible:true, mode: FeatureLayer.MODE_ONDEMAND, outFields: ["*"]});
     map.addLayer(visitorServiceLayer);
 
     //national wildlife refuges as dynamic layer
