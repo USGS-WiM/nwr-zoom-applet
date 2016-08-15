@@ -12,7 +12,7 @@ Full example: `http://{domain}/nwr-zoom-applet?lit=KLP`
 
 #### Dependencies
 App is built with the ArcGIS API for JavaScript, version 3.13.
-Bootstrap v3.3.2
+Bootstrap v3.3.7
 Esri [bootstrap map](https://github.com/Esri/bootstrap-map-js)
 Dojo Tundra theme for ArcGIS JS API
 jQuery v1.11.1
