@@ -2,7 +2,6 @@
 var map, nwrLayer, nwrOutlineLayer, visitorServiceLayer, dialog, initCenter = [-98.5795,39.8282];
 require([
     "esri/map",
-    "application/bootstrapmap",
     "esri/dijit/BasemapGallery",
     "esri/dijit/Scalebar",
     "esri/config",
@@ -28,7 +27,6 @@ require([
     "dojo/domReady!"
 ], function (
     Map,
-    BootstrapMap,
     BasemapGallery,
     Scalebar,
     esriConfig,
@@ -52,20 +50,21 @@ require([
     dijitPopup,
     urlUtils
 ) {
-    //map = new Map("map", {
-    //    basemap: "topo",
-    //    wrapAround180: true,
-    //    extent: new Extent({xmin:-14284551.845930014,ymin:2700367.3352579884,xmax:-7240115.31917005,ymax:6750918.338144969,spatialReference:{wkid:102100}}),
-    //    slider: true,
-    //    sliderStyle: "small",
-    //    logo: false
-    //});
-    map = BootstrapMap.create("mapDiv",{
-        basemap:"topo",
-        center: initCenter,
-        zoom:5,
-        logo: false
+    map = new Map("mapDiv", {
+       basemap: "topo",
+       wrapAround180: true,
+       extent: new Extent({xmin:-14284551.845930014,ymin:2700367.3352579884,xmax:-7240115.31917005,ymax:6750918.338144969,spatialReference:{wkid:102100}}),
+       slider: true,
+       sliderStyle: "small",
+       logo: false
     });
+    // map = BootstrapMap.create("mapDiv",{
+    //     basemap:"topo",
+    //     center: initCenter,
+    //     zoom:5,
+    //     logo: false
+    // });
+
     var scalebar = new Scalebar({map: map, scalebarUnit: "dual"});
     $("#fullExtentButton").click(function () {
         map.setZoom(5);
