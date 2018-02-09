@@ -1,0 +1,44 @@
+[
+  {
+    "name": "nwr-zoom-applet",
+    "organization": "U.S. Geological Survey",
+    "description": "Map applet for zooming to specified National Wildlife Refuge, for embedding",
+    "version": "v0.0.0",
+    "status": "Production"
+
+    "permissions": {
+      "usageType": "openSource",
+      "licenses": [
+        {
+          "name": "Public Domain",
+          "URL": "https://github.com/usgs/nwr-zoom-applet/blob/master/LICENSE.md"
+        }
+      ]
+    },
+
+    "downloadURL": "https://github.com/USGS-WiM/nwr-zoom-applet/archive/master.zip",
+    "disclaimerURL": "https://github.com/USGS-WiM/nwr-zoom-applet/blob/master/DISCLAIMER.md",
+    "repositoryUrl": "https://github.com/USGS-WiM/nwr-zoom-applet",
+    "vcs": "git",
+
+    "laborHours": null,
+
+    "tags": [
+      "nwr",
+      "zoom"
+    ],
+
+    "languages": [
+      "javascript"
+    ],
+
+    "contact": {
+      "name": "Blake Draper",
+      "email": "bdraper@usgs.gov"
+    },
+
+    "date": {
+      "metadataLastUpdated": "2018-02-09"
+    }
+  }
+]
