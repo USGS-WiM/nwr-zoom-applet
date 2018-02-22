@@ -4,7 +4,7 @@
     "organization": "U.S. Geological Survey",
     "description": "Map applet for zooming to specified National Wildlife Refuge, for embedding",
     "version": "v0.0.0",
-    "status": "Archival"
+    "status": "Archival",
 
     "permissions": {
       "usageType": "openSource",
